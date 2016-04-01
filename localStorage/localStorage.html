@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Local Storage Example | ishan-madhusanka.blogger.com</title>
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container col-sm-4 col-sm-offset-4" style="margin-top: 100px;">
+		<div class="panel panel-default">
+			<div class="panel-body" id="welcomeMessage">Hello World!</div>
+			<div class="panel-footer">
+				This is a message from localStorage ;) <br><br>
+				Enter your name: <input type="text" id="name"><hr>
+				<p>Enter your name to save it to localStorage, and try refreshing the page</p>
+				<p>Once the page is loaded, what you are seeing is the value from localStorage</p>
+			</div>
+		</div>
+	</div>
+	<script>
+		if (localStorage) {
+			// LocalStorage is supported!
+			console.log("localStorage is supported.. continuing");
+
+			// get the stored clientName variable if available
+			var clientName = localStorage.getItem('clientName');
+
+			// check if the 'clientName' is not set
+			// clientName needs to be converted to a string before comparing with a string
+			if (new String(clientName) == "undefined" || new String(clientName) == "null") {
+				document.getElementById('welcomeMessage').innerHTML = "Hello!";
+			} else { 
+				document.getElementById('welcomeMessage').innerHTML = "Hello " + clientName + "!";
+			}
+		} else {
+			// No support. Use a fallback such as browser cookies or store on the server.
+			console.log("localStorage is not supported");
+		}
+
+		$("#name").change(function(){
+			if (localStorage) {
+
+				// set the input value with to clientName variable
+				var clientName = $("#name").val();
+				localStorage.setItem('clientName', clientName);
+			} else {
+				// No support. Use a fallback such as browser cookies or store on the server.
+				console.log("localStorage is not supported");
+			}
+		});
+	</script>
+</body>
+</html>
